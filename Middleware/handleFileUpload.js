@@ -8,8 +8,10 @@ function handleFileUpload(req,res,next) {
         "only .jpg .jpeg or .png formate is allowed"
     );
 
+    // console.log("handle file upload --- ",upload);
     upload.any()(req,res,(err)=>{
         if(err){
+            console.log("found error",err);
             res.json({
                 errors :{
                     avatar:{
@@ -18,6 +20,7 @@ function handleFileUpload(req,res,next) {
                 } 
         })
         }else{
+            console.log("no error");
             next()
         }
     })
