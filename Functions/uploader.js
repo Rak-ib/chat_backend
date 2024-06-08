@@ -30,14 +30,14 @@ function uploader(
             fileSize: max_file_size
         },
         fileFilter:(req,file,cb)=>{
-            // console.log("came to file Filter?");
+            console.log("came to file Filter?");
             if(allowed_file_types.includes(file.mimetype)){
                 console.log("almost");
                 cb(null, true)
 
             }else{
                 console.log("came here?");
-                cb(createError(error_msg));
+                cb(error_msg);
             }
         }
     })

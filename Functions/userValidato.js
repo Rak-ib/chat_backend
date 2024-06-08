@@ -17,10 +17,13 @@ const userValidator=[
         try {
             const user=await User.findOne({email:value})
             if(user){
-                throw createError("Email already in use")
+                // throw createError("Email already in use")
+                console.log("email");
+                res.send("email is in use")
             }
         } catch (error) {
-            throw createError(error.message)
+            console.log(error.message);
+            res.send(error.message)
         }
     })
     

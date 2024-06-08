@@ -6,8 +6,13 @@ const cookieParser=require("cookie-parser")
 const loginRoute=require("./router/loginRouter")
 const userRoute=require("./router/userRouter")
 const inboxRoute=require("./router/inboxRouter")
+const path=require("path")
+const redirect = require("./Functions/redirect")
 
-
+// const corsOptions = {
+//     origin: 'http://localhost:3001', // Replace with your frontend URL
+//     credentials: true // Allow credentials (cookies) to be sent
+// };
 
 
 
@@ -19,20 +24,23 @@ app.use(cors({
     credentials:true
 }))
 dotenv.config()
-app.use(cookieParser(process.env.cookie_secreate))
+console.log(process.env.COOKIE_SECRETE);
+app.use(cookieParser(process.env.COOKIE_SECRETE))
 
 
 //Mongoose connection
-mongoose.connect(process.env.MONGOOES_CONNECTION)
+mongoose.connect(process.env.MONGOOSE_CONNECTION)
 .then(()=>console.log("connection successful"))
 .catch(err=>console.log("Error form mongoose:  ",err))
 
 
 // routes
-app.use("/",loginRoute)
 app.use("/user",userRoute)
-app.use("/inbox",inboxRoute)
 
+
+app.use("/inbox",inboxRoute)
+app.use('/uploads', express.static(path.join(__dirname, 'UploadedResources')));
+app.use("/",loginRoute)
 
 
 

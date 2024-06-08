@@ -17,13 +17,17 @@ async function login(req,res,next){
             if(passwordValidation){
                 const userObject={
                     username:user.name,
+                    userid: user._id,
                     mobile:user.mobile,
                     email:user.email,
+                    avatar:user.avatar||null,
                     role:"user"
                 };
+
                 const token=jwt.sign(userObject,process.env.JWT_SECRETE,{
                     expiresIn: 86400000
                 })
+                console.log("jwt token: ",token);
                 res.cookie("learn_with_rakib",token,{
                     maxAge: 86400000,
                     httpOnly:true,
