@@ -3,7 +3,7 @@ const uploader=require("../Functions/uploader")
 function handleFileUpload(req,res,next) {
     const upload=uploader(
         "avatars",
-        ["images/jpeg","image/jpg","image/png"],
+        ["image/jpeg","image/jpg","image/png"],
         1000000,
         "only .jpg .jpeg or .png formate is allowed"
     );
